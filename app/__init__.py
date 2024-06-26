@@ -11,7 +11,7 @@ except ImportError as e:
     exit()
 
 try:
-    import reorder
+    import app.reorder as reorder
 except ImportError as e:
     messagebox.showerror("Error", f"{e.name} module is missing. Please make sure you have cloned the repository correctly.")
     exit()
@@ -268,11 +268,3 @@ class PDFApp(tk.Tk):
         self.destroy()
 
     #---------------------------------------------------------------------------------------------------------
-
-def main():
-    app = PDFApp()
-    app.mainloop()  
-    return 0
-    
-if __name__ == '__main__':
-    main()

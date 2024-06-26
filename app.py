@@ -4,24 +4,16 @@ from tkinter import messagebox
 from tkinter import ttk
 import os
 
-def module_install_info(module_name):
-    if module_name == "PIL":
-        return "pip install pillow"
-    elif module_name == "cv2":
-        return "pip install opencv-python"
-    elif module_name == "numpy":
-        return "pip install numpy"
-    elif module_name == "PyPDF2":
-        return "pip install PyPDF2"
-    else:
-        return "pip install " + module_name
-
-
 try:
     import pdf_manipulation
+except ImportError as e:
+    messagebox.showerror("Error", f"{e.name} module is missing. Please install the required modules by running \npip install -r requirements.txt")
+    exit()
+
+try:
     import reorder
 except ImportError as e:
-    messagebox.showerror("Error", f"{e.name} module is missing. Please install the required modules by running \n{module_install_info(e.name)}")
+    messagebox.showerror("Error", f"{e.name} module is missing. Please make sure you have cloned the repository correctly.")
     exit()
 
 
@@ -268,7 +260,7 @@ class PDFApp(tk.Tk):
             pdf_manipulation.convert2pdf(input_dir, output_dir,merged_filename, enhance, delete_processed_images, delete_temp_pdfs)
         except ImportError as e:
             self.progress_2.config(text="")
-            messagebox.showerror("Error", f"{e.name} module is missing. Please install the required modules by running \n{module_install_info(e.name)}")
+            messagebox.showerror("Error", f"{e.name} module is missing. Please install the required modules by running \npip install -r requirements.txt")
             exit()
         except Exception as e:
             self.progress_2.config(text="")

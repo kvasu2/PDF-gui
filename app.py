@@ -258,10 +258,6 @@ class PDFApp(tk.Tk):
         
         try:
             pdf_manipulation.convert2pdf(input_dir, output_dir,merged_filename, enhance, delete_processed_images, delete_temp_pdfs)
-        except ImportError as e:
-            self.progress_2.config(text="")
-            messagebox.showerror("Error", f"{e.name} module is missing. Please install the required modules by running \npip install -r requirements.txt")
-            exit()
         except Exception as e:
             self.progress_2.config(text="")
             messagebox.showerror("Error", f"{e}")
